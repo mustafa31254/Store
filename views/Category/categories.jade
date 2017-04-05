@@ -1,0 +1,39 @@
+extends ../Admin/adminLayout
+
+block content
+    .container
+        .col-md-6.col-md-offset-3
+            .btn-group(role='group', aria-label='Basic example')
+                a.btn.btn-primary.btn-sm(href='/categories/addCategory/')
+                    i.glyphicon.glyphicon-edit 
+                    | Add New category
+                           
+            table.table.table-hover.table-responsive
+                thead
+                    tr 
+                        th Title
+                        th Actions
+                tbody
+                    if categories
+                        each category, i in categories
+                            tr
+                                td #{category.title}
+                                td
+                                    img.img-thumbnail(src="/uploads/categoryImages/#{category.image}" width="45" height="35")
+                       
+                                td 
+                                    .btn-group(role='group', aria-label='Basic example')
+                                        a.btn.btn-primary.btn-xs(href='/categories/categoryEdit/#{category._id}')
+                                            i.glyphicon.glyphicon-edit 
+                                            | Edit
+                                    form.form-inline(method='post', action='/categories/categoryDelete/#{category._id}?_method=DELETE')
+                                        button.btn.btn-danger.btn-xs(type='submit') Delete
+                        .pull-right
+                            p Pagination
+                            != categories.pagination.render({ baseUrl: '/categories/' })
+
+                    else
+                        .panel.panel-warning
+                        .panel-heading
+                        h2 no posts to display                   
+

@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+  form(method='POST',action="/users/forgot")
+    legend Forgot Password
+    .form-group.form-inline
+      input.form-control(type='text', name='email', placeholder="Enter your Email" autofocus)
+    input(type="hidden", name="_csrf", value="#{csrf}") 
+    button.btn.btn-primary(type='submit') Reset Password

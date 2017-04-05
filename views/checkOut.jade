@@ -1,0 +1,96 @@
+extends layout
+
+block content
+    .row
+        .col-md-6.col-md-offset-3
+            h2 Check Out
+            h3 Your Total: $ #{totalPrice}
+            ul.errors
+                if errors
+                    each error,i in errors
+                        li.alert.alert-danger #{error.msg}
+            
+            //- form(method="post", action="/checkout",id="checkout-form" )
+            form#payment-form(action='/checkout', method='POST')
+                span.payment-errors
+                //- .form-row.form-group
+                //-    label(for="card-number") Cardit Card number :
+                //-    input.form-control(type='text', size='20', data-stripe='number')
+ 
+                //- .form-group
+                //-     label(for="name") Name:
+                //-     input#name.form-control( name="name", data-stripe='name',type="text",placeholder="Name",required) 
+                
+                //- .form-group
+                //-     label(for="card-name") Card Holder Name:
+                //-     input#card-name.form-control(name="card-holder-name" size='30', data-stripe='card-name',type="text",placeholder=" card holder name",required) 
+                
+                .form-group
+                    label(for="address") Address:
+                    input#address.form-control(name="address" size='50', data-stripe='address',type="text",placeholder="Address",required) 
+                
+                .form-group
+                    label(for="card-number") Cardit Card number:
+                    input#card-number.form-control( size='20', data-stripe='number',type="text",placeholder=" card number",required) 
+                
+                .form-group.col-md-4
+                    label(for="card-expiry-month") card-expiry-month :
+                    input#card-expiry-month.form-control(name="card-expiry-month",size='2', data-stripe='exp_month',type="text",placeholder="card-expiry-month",required) 
+                .form-group.col-md-4
+                    label(for="card-expiry-year") card-expiry-year :
+                    input#card-expiry-year.form-control(name="card-expiry-year",size='2', data-stripe='exp_year',type="text",placeholder="card-expiry-year",required) 
+                .form-group.col-md-4
+                    label(for="card-cvc") Cardit Card cvc :
+                    input#card-cvc.form-control(name="card-cvc",type="text",size='4', data-stripe='cvc',placeholder="card-cvc number",required) 
+                
+                //- .form-row.form-group.col-md-4
+                //-     label
+                //-         span Expiration (MM/YY)
+                //-     input.form-control(type='text', size='2', data-stripe='exp_month')
+                //-     span  / 
+                //-     input.form-control(type='text', size='2', data-stripe='exp_year')
+                //- .form-row.form-group.col-md-4
+                //-     label
+                //-         span CVC
+                //-     input.form-control(type='text', size='4', data-stripe='cvc')
+                .form-row.form-group
+                    label(for="billing-Zip") Biling Zip
+                    input.form-control#billing-Zip(type='text', size='6',placeholder="Address Zip", data-stripe='address_zip')
+                input.btn-success.submit.form-control(type='submit', value='Submit Payment')
+
+            
+            
+            
+            //- #charge-error.alert.alert-danger.hidden
+            //- #charge-error.alert.alert-danger.hidden
+    
+            
+            //- form(method="post", action="/checkout",id="checkout-form" )
+            //-     .form-group
+            //-         label(for="Name") Name:
+            //-         input#Name.form-control(name="name",type="text",placeholder="Enter your  Name",required)
+            //-     .form-group
+            //-         label(for="address") Address:
+            //-         input#address.form-control(name="address",type="text",placeholder="Enter your address",required)
+            //-     .form-group
+            //-         label(for="card-name") Car Holder Name:
+            //-         input#card-name.form-control(name="card-name",type="text",placeholder="Enter your card holder name",required) 
+            //-     .form-group
+            //-         label(for="card-number") Cardit Card number :
+            //-         input#card-number.form-control(name="card-number",type="text",placeholder="Enter your card number",required) 
+            //-     .form-group.col-md-4
+            //-         label(for="card-expiry-month") card-expiry-month :
+            //-         input#card-expiry-month.form-control(name="card-expiry-month",type="text",placeholder="card-expiry-month",required) 
+            //-     .form-group.col-md-4
+            //-         label(for="card-expiry-year") card-expiry-year :
+            //-         input#card-expiry-year.form-control(name="card-expiry-year",type="text",placeholder="card-expiry-year",required) 
+            //-     //- input(type="hidden", name="_csrf", value="#{csrf}")
+            //-     .form-group.col-md-4
+            //-         label(for="card-cvc") Cardit Card cvc :
+            //-         input#card-cvc.form-control(name="card-cvc",type="text",placeholder="card-cvc number",required) 
+                
+            //-     button.btn.btn-success.btn-block(name="submit",type="submit") Buy Now
+    
+        script(src="https://js.stripe.com/v2/")
+ 
+        script(src="/javascripts/checkout.js")

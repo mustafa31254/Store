@@ -1,0 +1,19 @@
+extends layout
+block content
+    .row
+        .col-md-8.col-md-offset-2
+            h1 Your Orders
+            if orders
+                each order,i in orders
+                    .panel.panel-default
+                        .panel-heading Address: #{order.address} 
+                        .panel-body
+                            ul.list-group
+                                each item,i in order.items
+                                    li.list-group-item #{item.item.title} | Units #{item.qty}  
+                                        span.badge #{item.price}
+                        .panel-footer
+                            strong Total Price $ #{order.cart.totalPrice} 
+
+                                            
+    

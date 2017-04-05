@@ -1,0 +1,39 @@
+extends adminLayout
+
+block content
+    .container
+        a.btn.btn-primary.btn-small(href="/posts/addPost")
+            i.glyphicon.glyphicon-edit 
+            | Add new
+        table.table.table-hover.table-responsive
+            thead
+                tr 
+                    th Title
+                    th Author
+                    th Date
+                    th Category
+                    th Image
+                    th Actions
+
+            tbody
+                    if posts
+                        each post, i in posts
+                            tr
+                                td #{post.title}
+                                td #{post.author}
+                                td #{moment(post.createdAt).format('MM/DD/YYYY')}
+                                td #{post.category}
+                                td
+                                    img.img-thumbnail(src="/uploads/postsImages/#{post.image}" width="45" height="50")
+                                td 
+                                    .btn-group(role='group', aria-label='Basic example')
+                                        a.btn.btn-primary.btn-xs(href='/posts/postEdit/#{post._id}')
+                                            i.glyphicon.glyphicon-edit 
+                                            | Manage
+                                        //- a.btn.btn-primary.btn-xs(href='/posts/changePassword/#{user._id}')
+                                        //-     i.glyphicon.glyphicon-cog 
+                                        //-     | Change Password    
+                                        form.form-inline(method='post', action='/admin/deletePost/#{post._id}?_method=DELETE')
+                                            button.btn.btn-danger.btn-xs(type='submit') Delete
+
+        

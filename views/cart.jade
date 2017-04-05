@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    if products
+        .row
+            .col-md-6.col-md-offset-3
+                ul.list-group
+                    each product,i in products 
+                        li.list-group-item
+                            span.badge Quantity #{product.qty}  
+                            strong Title #{product.item.title}  
+                            span.label.label-success  #{product.item.price}           
+                            .btn.group
+                                button.btn.btn-primary.btn-xs.dropdown-toggle(type="button" data-toggle="dropdown") Action 
+                                    span.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href="/reduce/#{product.item._id}") Reduce By 1
+                                    li
+                                        a(href="/remove/#{product.item._id}") Remove All
+                                
+        .row
+            .col-md-6.col-md-offset-3
+                strong Total #{totalPrice} 
+    
+    
+        .row
+            .col-md-6.col-md-offset-3
+                a.btn.btn-success(href="/CheckOut") CheckOut  
+    else
+        .row
+            .col-md-6.col-md-offset-3
+                h2 No Items    

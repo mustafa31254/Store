@@ -1,0 +1,113 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')
+
+    //- link(rel="stylesheet" href="node_modules/bootstrap-block-grid/dist/bootstrap3-block-grid.min.css")
+  body
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') Mustafa's application
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li.pull-right(class=(title=="Shopping To Cart" ? "active" : ''))
+                a(href='/shoppingCart/')
+                  i.fa.fa-cart-plus
+                  |  Shoppin Cart  
+                  if session.cart
+                    span.badge #{session.cart.totalQuantity}
+                    
+
+            if !user
+              li(class=(title=="register" ? "active" : ''))
+                a(href='/users/register')
+                  i.fa.fa-user-plus
+                  |  Register
+                 
+              li(class=(title=="login" ? "active":""))
+                a(href='/users/login')
+                  i.fa.fa-sign-in
+                  |  Login
+
+          //- if user && user.role==="Admin"
+          //-   li(class=(title=="admin" ? "active" : ''))
+          //-       a(href='/admin/members') Admin
+          ul.nav.navbar-nav.navbar-right
+            if user
+              //- li(class=(title=="members" ? "active" : ''))
+              //-   a(href='/users/members')
+              //-     i.fa.fa-users
+              //-     |  Members
+              
+              li(class=(title=="Posts" ? "active" : ''))
+                a(href='/posts/') Products
+                
+              li(class=(title=="addPost" ? "active" : ''))
+                a(href='/posts/addPost/') Add Product
+              li(class=(title=="Categories" ? "active" : ''))
+                a(href='/categories/') Categories
+              li(class=(title=="AddCategory" ? "active" : ''))
+                a(href='/categories/AddCategory') Add Category
+              li.dropdown.active
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false') Account 
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href='/users/')
+                      i.fa.fa-user
+                      |  Account
+                  li            
+                    a(href='/users/logout') 
+                      i.fa.fa-sign-out
+                      |  logout
+
+                  li
+                    a(href='#') Something else here
+                  li.divider(role='separator')
+                  li.dropdown-header Nav header
+                  li
+                    a(href='#') Separated link
+                  li
+                    a(href='#') One more separated link
+            if user && user.role==="Admin"
+              li(class=(title=="admin" ? "active" : ''))
+                a(href='/admin/members') Admin Area      
+          
+    .container        
+      != messages()
+      block content
+    //- .navbar-inner.navbar-fixed-bottom
+    //-   footer 
+    //-     p
+    //-     | Awesome Blog
+    //-     br
+    //-     |  &copy; 2014, All Rights Reserved
+
+  
+  
+  //- footer
+  //-   p
+  //-     | Awesome Blog
+  //-     br
+  //-     |  &copy; 2014, All Rights Reserved
+
+         
+  
+              
+//- script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+
+script(src='/javascripts/bootstrap.js')
+script(src='/javascripts/application.js')
+//- script(src="https://js.stripe.com/v2/')
+

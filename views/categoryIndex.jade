@@ -1,0 +1,77 @@
+extends layout
+
+block content
+  .row
+    ol.breadcrumb
+      li.breadcrumb-item
+        a.btn.btn-primary.btn-xs(href='/') Home
+      li.breadcrumb-item.active #{category}
+  
+  if posts
+    
+    .row
+      .pull-right
+        p Pagination
+        != posts.pagination.render({ baseUrl: '/categories/show/:#{posts[i+i2].category}' })
+
+    each post,i in posts
+      if (i % 3 == 0)
+        div.row
+          each post2, i2 in posts.slice(i, i+3)
+                .col-md-3.col-lg-4.col-sm-2
+                  h2 #{posts[i+i2].title}
+                  a(href="/posts/show/#{posts[i+i2]._id}")
+                    img.img-resposive.img-thumbnail(src="/uploads/postsImages/"+posts[i+i2].image)
+                  !=trancateText(posts[i+i2].body,200)
+                  | Posted By #{post.author} on #{moment(posts[i+i2].date).format("MM-DD-YYYY")} In 
+                  a.btn.btn-warning.btn-xs(href="/categories/show/#{posts[i+i2].category}") #{posts[i+i2].category}
+                        //- | Edited By #{post.updatedBy}
+                  br
+                  a.btn.btn-xs.btn-primary(href="/posts/show/#{posts[i+i2]._id}")
+                    i.fa.fa-info-circle
+                    |  Read More!
+                    
+                  span.price #{posts[i+i2].price}$
+                        
+                  a.pull-right.btn.btn.sm.btn-success(href="/addToCart/#{posts[i+i2]._id}")
+                    i.fa.fa-cart-plus
+                    |  Add to Cart  
+
+    else
+      .panel.panel-warning
+        .panel-heading
+          h2 no posts to display                   
+                
+  
+  //- if posts
+  //-   each post,i in posts
+  //-     .col-md-4.col-sm-6.col-xs-12
+
+  //-       .panel.panel-primary
+  //-         .panel-heading
+            
+  //-           a.title(href="/posts/show/#{post._id}") #{post.title}
+  //-         .panel-body
+  //-           img.img-resposive.img-thumbnail(src="/uploads/postsImages/#{post.image}")
+  //-           !=trancateText(post.body,200)
+  //-           | Posted By #{post.author} on #{moment(post.date).format("MM-DD-YYYY")} In 
+  //-           a.btn.btn-warning.btn-xs(href="/categories/show/#{post.category}") #{post.category}
+  //-           //- | Edited By #{post.updatedBy}
+  //-           br
+  //-           a.btn.btn-xs.btn-primary(href="/posts/show/#{post._id}")
+  //-             i.fa.fa-info-circle
+  //-             |  Read More!
+  //-         .panel-footer 
+            
+  //-           span.price #{post.price}$
+            
+  //-           a.pull-right.btn.btn.sm.btn-success(href="/addToCart/#{post._id}")
+  //-             i.fa.fa-cart-plus
+  //-             |  Add to Cart  
+    
+  //-   != posts.pagination.render({ baseUrl: '/' })
+
+  //- else
+  //-   .panel.panel-warning
+  //-   .panel-heading
+  //-     h2 no posts to display    

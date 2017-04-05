@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+    h2.text-primary edit
+    ul.errors
+        if errors
+            each error,i in errors
+                li.alert.alert-danger #{error.msg}
+    if user        
+        form(method="post",action="/users/editAccount/#{user._id}",enctype="multipart/form-data")
+            .form-group
+                label(for="firstName") Name:
+                input#firstName.form-control(name="name",type="text",value="#{user.name}")
+            .form-group
+                label(for="email") Email:
+                input#email.form-control(name="email",type="Email",value="#{user.email}")
+            
+            .form-group
+                label(for="username") Username:
+                input#username.form-control(name="username",type="text",value="#{user.username}") 
+             
+             img.img-thumbnail(src="/uploads/profileImages/#{user.image}" width="75" height="80")
+ 
+            .form-group
+                label(for="image") Change Profile Image :
+                input#image.form-control(name="profileImage",type="file",placeholder="Upload Image")              
+            input(type="hidden", name="_csrf", value="#{csrf}") 
+
+            .form-group
+                input.btn.btn-primary(name="submit",type="submit", value="Register")   

@@ -1,0 +1,20 @@
+extends ../Admin/adminLayout
+block content
+    .col-md-6.col-md-offset-3
+
+        if errors
+            each error,i in errors
+                li.alert.alert-danger #{error.msg}
+
+        h2.text-primary Add New Category        
+        form(method="post",action="/categories/addCategory",enctype="multipart/form-data")
+            .form-group
+                label(for="title") category Title :
+                input#title.form-control(name="title",type="text",placeholder="Title")
+            .form-group
+                label(for="image") category Image :
+                input#image.form-control(name="categoryImage",type="file",placeholder="Upload Image")  
+          
+            input.btn.btn-primary(name="submit",type="submit", value=" Add")   
+
+            

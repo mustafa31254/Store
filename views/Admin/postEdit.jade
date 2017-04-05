@@ -1,0 +1,35 @@
+extends adminLayout
+
+block content
+    .col-md-8.col-md-offset-2
+        h2.text-primary edit Post
+        ul.errors
+            if errors
+                each error,i in errors
+                    li.alert.alert-danger #{error.msg}
+        if post        
+        form(method="post",action="/admin/postEdit/#{post._id}", enctype="multipart/form-data")
+            //- .form-group
+            //-     label(for="title") title:
+            //-     input#title.form-control(name="name",type="text",value="#{post.title}")
+            .form-group.row
+                label(for="title") Title:
+                input#title.form-control(name="title",type="text",value="#{post.title}"  ,placeholder="Post's title")
+            .form-group.row
+                select.form-control(name="category")
+                    each category,i in categories
+                        option(value="#{category.title}" ) #{category.title} 
+            .form-group
+                label(for="body") Body:
+                textarea.form-control(name="body", id="body") #{post.body}
+            img.img-thumbnail(src="/uploads/postsImages/#{post.image}") 
+            .form-group
+                label(for="image") Update Picture :
+                input#image.form-control(name="postImage",type="file",placeholder="Upload Image")              
+            .form-group
+                input.btn.btn-primary(name="submit",type="submit", value=" Update ")   
+
+            script(src="/ckeditor/ckeditor.js")
+            script
+                | CKEDITOR.replace("body");
+           

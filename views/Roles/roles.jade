@@ -1,0 +1,29 @@
+extends ../Admin/adminLayout
+
+block content
+    .container
+        .col-md-6.col-md-offset-3 
+
+            .btn-group(role='group', aria-label='Basic example')
+                a.btn.btn-primary(href='/roles/addRole/')
+                    i.glyphicon.glyphicon-plus 
+                    |  Add New
+                           
+            table.table.table-hover.table-responsive
+                thead
+                    tr 
+                        th Name
+                        th Actions
+                tbody
+                    if roles
+                        each role, i in roles
+                            tr
+                                td #{role.name}
+                                td 
+                                    .btn-group(role='group', aria-label='Basic example')
+                                        a.btn.btn-primary.btn-xs(href='/roles/roleEdit/#{role._id}')
+                                            i.glyphicon.glyphicon-edit 
+                                            | Edit
+                                    form.form-inline(method='post', action='/roles/roleDelete/#{role._id}?_method=DELETE')
+                                        button.btn.btn-danger.btn-xs(type='submit') Delete
+

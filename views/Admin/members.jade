@@ -1,0 +1,42 @@
+extends adminLayout
+
+block content
+    .container
+        table.table.table-hover.table-responsive
+            thead
+                tr 
+                    th Name
+                    th Username
+                    th Email
+                    th Role
+                    th Picture
+                    th Actions
+                    th Delete
+
+            tbody
+                each user, i in users
+                    tr
+                        td #{user.name}
+                        td #{user.username}
+                        td #{user.email}
+                        td #{user.role}
+                        td
+                            img.img-thumbnail(src="/uploads/profileImages/#{user.image}" width="45" height="50")
+                        td 
+                            .btn-group(role='group', aria-label='Basic example')
+                                a.btn.btn-primary.btn-xs(href='/admin/userEdit/#{user._id}')
+                                    i.glyphicon.glyphicon-edit 
+                                    | Edit
+                                a.btn.btn-primary.btn-xs(href='/admin/changePassword/#{user._id}')
+                                    i.glyphicon.glyphicon-cog 
+                                    | Change Password 
+                                a.btn.btn-primary.btn-xs(href='/admin/assignRole/#{user._id}')
+                                    i.glyphicon.glyphicon-cog 
+                                    | Assign Role 
+                        td
+                            form(method='post', action='/admin/userDelete/#{user._id}?_method=DELETE')
+                                button.btn.btn-danger.btn-sm(type='submit')
+                                    i.glyphicon.glyphicon-remove 
+                                    | Remove User
+                                 
+

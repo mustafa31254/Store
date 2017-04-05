@@ -1,0 +1,75 @@
+extends ../layout
+block content
+  .container
+    .row
+      ol.breadcrumb
+        li.breadcrumb-item
+          a.btn.btn-primary.btn-xs(href='/') Home
+        li.breadcrumb-item
+          a.btn.btn-primary.btn-xs(href="/categories/show/#{post.category}") #{post.category} 
+        li.breadcrumb-item.active #{post.title}
+    .row
+      .col-md-6
+        img.img-responsive(src="/uploads/postsImages/#{post.image}")
+      .col-md-4  
+        p #{post.title}
+        !=post.body
+        div.price
+          span #{post.price}$
+            
+        P Posted By #{post.author} in on #{moment(post.date).format("MM-DD-YYYY")} in #{post.category}
+        
+    br
+    hr
+    a.btn.btn-primary(href="/categories/show/#{post.category}") Back to #{post.category} 
+    
+  .row
+    h3 Comments
+    hr
+    br
+    if post.comments
+      each comment,i in post.comments
+        .row
+          .commenterImage
+            img.img-responsive.user-photo(src='/uploads/profileImages/#{comment.commentUserImage}')
+          .commentText
+            p #{comment.body}
+          span.date.sub-text By #{comment.name} on #{comment.commentDate}
+          hr
+          br
+          
+
+
+    .container
+      h2 Comment
+      if errors
+        ul
+          each error,i in errors
+            li.alert.alert-danger #{error.msg}        
+      form(method="post", action="/posts/addComment")  
+        input(name="postId",type="hidden",value="#{post._id}")
+        //- label Name:
+        //- input.form-control(name="name",type="text")
+        //- label Email:
+        //- input.form-control(name="email",type="Email")
+        label Comment:
+        textarea.form-control(name="body", id="body")
+        br
+        input.btn.btn-success(name="submit",type="submit",value="Comment")  
+        br
+        hr
+
+      //- h2 Comments
+      //- if post.comments
+      //-   each comment,i in post.comments
+      //-     .row
+      //-       .col-sm-1
+      //-         .thumbnail
+      //-           img.img-responsive.user-photo(src='https://ssl.gstatic.com/accounts/ui/avatar_2x.png')
+      //-       .col-sm-12
+      //-         h3 Comments   
+      //-         .panel-heading #{comment.name} 
+      //-          .panel-body
+      //-          !=comment.body
+           
+    

@@ -1,0 +1,21 @@
+extends adminLayout
+
+block content
+    .col-md-4.col-md-offset-3 
+
+        ul.errors
+            if errors
+                each error,i in errors
+                    li.alert.alert-danger #{error.msg}
+        if user
+            h2.text-primary Assign Role for #{user.username} 
+            form(method="post",action="/admin/assignRole/#{user._id}")
+                .form-group
+                    .form-group
+                    label(for="role") Assign Role :
+                    select.form-control(name="role")
+                        each role,i in roles
+                            option(value="#{role.name}") #{role.name}
+                .form-group
+                    input.btn.btn-success(name="submit",type="submit", value="Assign Role")
+                 
