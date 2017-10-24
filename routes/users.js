@@ -227,7 +227,7 @@ res.redirect(returnUrl);
 });
 
 router.get("/logout",ensureAuthenticated,function(req,res){
-  req.logout();
+  req.logOut();
   req.flash("success","You are logged Out");
   res.redirect('/');
 });
