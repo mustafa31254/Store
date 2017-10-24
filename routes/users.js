@@ -118,8 +118,8 @@ router.post('/forgot',ensureNotAuthenticated, function(req, res, next) {
       var smtpTransport = nodemailer.createTransport('SMTP', {
         service: 'Gmail',
         auth: {
-          user: 'mustafa312540@gmail.com',
-          pass: '0926312540'
+          user: 'test @gmail.com',
+          pass: 'type your password'
         }
       });
       var mailOptions = {
@@ -185,8 +185,8 @@ bcrypt.hash(password,10,function(err,hash){
       var smtpTransport = nodemailer.createTransport('SMTP', {
         service: 'SendGrid',
         auth: {
-          user: 'mustafa312540@gmail.com',
-          pass: '0926312540'
+          user: 'test@gmail.com',
+          pass: 'testpassword'
         }
       });
       var mailOptions = {
