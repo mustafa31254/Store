@@ -1,7 +1,7 @@
 
 var mongodb= require('mongodb');
 var mongoose= require('mongoose');
-mongoose.connect("mongodb://localhost/nodeAuth");
+//mongoose.connect("mongodb://localhost/nodeAuth");
 var bcrypt=require('bcryptjs');
 var db=mongoose.connection;
 var userSchema= mongoose.Schema({

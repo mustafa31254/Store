@@ -29,7 +29,7 @@ var methodOverride = require('method-override');
 var db=mongoose.connection;
 
 var app = express();
-app.listen(3000);
+app.listen(3001);
 
 app.locals.moment = require('moment');
 app.locals.trancateText=function(text,length){
@@ -37,47 +37,10 @@ app.locals.trancateText=function(text,length){
     return trancatedText;
 }
 
-// app.locals.requireRole = function(role) {
-//   return function(req, res, next) {
-//     if('user' in req.session && req.session.user.role === role)
-//       next();
-//     else
-//       res.send(403);
-//       res.redirect("/");
-//       req.flash("danger","You are not Authorized");
-//   }
-// };
-
-
-// var role = new ConnectRoles({
-//   failureHandler: function (req, res, action) {
-//     // optional function to customise code that runs when
-//     // user fails authorisation
-//     req.flash("error","authorisation failed");
-//     var accept = req.headers.accept || '';
-//     res.status(403);
-//     if (~accept.indexOf('html')) {
-//       res.render('access-denied', {action: action});
-//     } else {
-//       res.send('Access Denied - You don\'t have permission to: ' + action);
-//     }
-//   }
-// });
-
-// role.use(function (req, action) {
-//   if (!req.isAuthenticated()) return action === 'access home page';
-// })
-// role.use('access private page', function (req) {
-//   if (req.user.role === 'author') {
-//     return true;
-//   }
-// })
-// role.use(function (req) {
-//   if (req.user.role === 'admin') {
-//     return true;
-//   }
-// });
-
+mongoose.connect("mongodb://localhost/nodeAuth", {
+    useMongoClient: true,
+    /* other options */
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
