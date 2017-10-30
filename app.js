@@ -29,7 +29,9 @@ var methodOverride = require('method-override');
 var db=mongoose.connection;
 
 var app = express();
-app.listen(3001);
+app.listen(3001,()=>{
+    console.log('Running on Port 3001');
+});
 
 app.locals.moment = require('moment');
 app.locals.trancateText=function(text,length){
