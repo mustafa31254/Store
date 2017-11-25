@@ -168,13 +168,20 @@ app.get('*',function(req,res,next){
 //   next();
 // });
 
-
+function ensureAdmin(req,res,next){
+    if(req.user && req.user.role==="Admin")
+    {
+    return    next();
+    }
+    res.redirect('/');
+    req.flash("danger","you are not authorized to page");
+  }
 
 app.use('/', index);
 app.use('/users', uploadProfileImages.single("profileImage"), users);
 app.use('/posts',uploadPostImages.single("postImage"), posts);
 app.use('/categories',uploadCategoryImages.single("categoryImage"), categories);
-app.use('/roles', roles);
+app.use('/roles',ensureAdmin , roles);
 app.use('/admin',uploadProfileImages.single("profileImage"), admin);
 
 // catch 404 and forward to error handler
@@ -193,6 +200,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
+}); 
 
 module.exports = app;
